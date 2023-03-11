@@ -12,7 +12,6 @@ def calculation(a,b,c):
     
 def bodmas(equation):
     equation = equation.split()
-    # print(equation)
     if len(equation)<3:
         return equation[0]
     priority = {'+':1,'-':1,'*':2 , '/':2}
@@ -25,9 +24,7 @@ def bodmas(equation):
     stack.append(equation[2])
     i=3
     while(i<len(equation) and len(operator)>0  ):
-        # print(equation[i],stack,operator)
         if equation[i] in priority and priority[operator[-1]]>=priority[equation[i]]:
-            # print(stack,operator)
             oper =operator.pop()
             b = stack.pop()
             a = stack.pop()
@@ -35,8 +32,6 @@ def bodmas(equation):
             stack.append(c)
             operator.append(equation[i])
             i+=1
-            # print(stack,operator)
-            # print()
         elif equation[i] in priority : 
             operator.append(equation[i])
             i+=1
@@ -63,15 +58,11 @@ numbers_words = ['zero','one','two','three','four','five','six','seven','eight',
 ]
 
 file = open('TMW_large.txt')
-# t = int(input())
 t = int(file.readline())
 while(t>0):
     t-=1
 
-    # equation = list(map(str, input("elements of array:-").strip().split()))
-    # equation=" ".join(equation)
     equation = file.readline()
-    # print(equation)
     
     
     for i in range(0,len(operator_words)):
@@ -89,15 +80,13 @@ while(t>0):
     final = equation.split('=')
     lhs = final[0]
     rhs = final[1]
-    # print(lhs,rhs)
     lhs = bodmas(lhs)
-    # print(lhs,rhs)
     with open('output.txt','a') as f:
         if float(lhs) == float(rhs):
             f.write(f'true\n')
             # f.write(f'true {float(lhs)},{float(rhs)}\n')
         else:
             f.write(f'false\n') 
-            f.write(f'false {float(lhs)},{float(rhs)}\n') 
+            # f.write(f'false {float(lhs)},{float(rhs)}\n') 
 
 
